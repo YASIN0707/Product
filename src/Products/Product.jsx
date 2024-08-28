@@ -1,50 +1,47 @@
-import React from 'react'
-import { incraction,decraction } from '../redux/product/product.action'
-import { useDispatch, useSelector } from 'react-redux'
-function Product() {
+import { useDispatch, useSelector } from "react-redux"
+import { incraction,decraction } from "../redux/product/product.action"
 
-    let dispatch = useDispatch()
+let Product=()=>{
 
-    let Product = useSelector((state)=>{
+    let dispatch=useDispatch()
+    let Product=useSelector((state)=>{
         return state
     })
 
-
-    let increHandler =()=>{
+   let decrHandler=()=>{
+       dispatch(decraction())
+    }
+    
+   let increHandler=()=>{
         dispatch(incraction())
     }
 
-    let decrHandler = ()=>{
-        dispatch(decraction())
-    }
-
-  return (
-    <div>
-        <div className="container mt-5">
-            <div className="row">
-                <table className='table table-bordered'>
-                    <thead className='bg-secondary'>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{Product.name}</td>
-                            <td><img src={Product.image} alt="" width={80}/></td>
-                            <td><i className='fa fa-square-minus' onClick={decrHandler}></i>{Product.qty}<i className='fa fa-circle-plus' onClick={increHandler}></i></td>
-                            <td>{(Product.price*Product.qty).toLocaleString('en-IN')}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    return <div>
+       <div className="container mt-5">
+        <div className="row">
+            <table className="table">
+                <thead className="bg-primary">
+                    <th>Name</th>
+                    <th>image</th>
+                    <th>Qty</th>
+                    <th>price</th>
+                </thead>
+                <tbody className="stripped">
+                    <tr>
+                        <td>{Product.name}</td>
+                        <td><img src={Product.image} width={80} /></td>
+                        <td><i className="fa fa-square-minus" onClick={decrHandler}></i>{Product.qty}<i className="fa fa-circle-plus" onClick={increHandler}></i></td>
+                       
+                        <td className="fa-solid fa-indian-rupee-sign">{(Product.price*Product.qty).toLocaleString('en-IN')}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        {/* <pre>{JSON.stringify(Product.qty)}</pre>
-        <button onClick={decrHandler}>-</button>{Product.qty}
+       </div>
+        <hr/>
+      {/*   <pre>{JSON.stringify(Product)}</pre> */}
+       {/*  <button onClick={decrHandler}>-</button>
         <button onClick={increHandler}>+</button> */}
     </div>
-  )
 }
-
 export default Product
